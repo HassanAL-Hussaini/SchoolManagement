@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.example.schoolmanagement.API.ApiException;
 import org.example.schoolmanagement.Model.Address;
 import org.example.schoolmanagement.Model.Teacher;
-import org.example.schoolmanagement.OutDTO.TeacherOutDTO;
 import org.example.schoolmanagement.Repository.AddressRepo;
 import org.example.schoolmanagement.Repository.TeacherRepo;
 import org.springframework.http.HttpStatus;
@@ -47,13 +46,12 @@ public class TeacherService {
         teacherRepo.delete(teacher);
     }
 
-    public TeacherOutDTO getTeacherById(Integer teacherId) {
+    public Teacher getTeacherById(Integer teacherId) {
         Teacher teacher = teacherRepo.findTeacherById(teacherId);
-        Address address = addressRepo.findAddressById(teacherId);
-        if(teacher == null || address == null) {
+
+        if(teacher == null) {
             throw new ApiException("Teacher/Address not found");
         }
-        return new TeacherOutDTO(teacher.getName(),teacher.getAge(),teacher.getEmail()
-        ,teacher.getSalary(),address.getArea(), address.getStreet(), address.getBuildingNumber());
+        return teacher;
     }
 }
