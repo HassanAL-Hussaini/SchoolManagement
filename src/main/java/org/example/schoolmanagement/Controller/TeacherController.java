@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.schoolmanagement.API.ApiResponse;
 import org.example.schoolmanagement.Model.Teacher;
-import org.example.schoolmanagement.OutDTO.TeacherOutDTO;
 import org.example.schoolmanagement.Repository.TeacherRepo;
 import org.example.schoolmanagement.Service.TeacherService;
 import org.springframework.http.HttpStatus;
@@ -42,6 +41,13 @@ public class TeacherController {
     @GetMapping("/get-teacher-by-id/{teacherId}")
     public ResponseEntity<?> getTeacherById(@PathVariable Integer teacherId) {
        return ResponseEntity.status(HttpStatus.OK).body(teacherService.getTeacherById(teacherId));
+    }
+
+    // GET: اسم المعلم بحسب رقم الكورس
+    @GetMapping("/teacher-name/{courseId}")
+    public ResponseEntity<?> getTeacherName(@PathVariable Integer courseId) {
+        String teacherName = teacherService.getTeacherNameByCourseID(courseId);
+        return ResponseEntity.ok(teacherName);
     }
 
 }

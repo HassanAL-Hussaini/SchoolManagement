@@ -3,8 +3,10 @@ package org.example.schoolmanagement.Service;
 import lombok.AllArgsConstructor;
 import org.example.schoolmanagement.API.ApiException;
 import org.example.schoolmanagement.Model.Address;
+import org.example.schoolmanagement.Model.Course;
 import org.example.schoolmanagement.Model.Teacher;
 import org.example.schoolmanagement.Repository.AddressRepo;
+import org.example.schoolmanagement.Repository.CourseRepo;
 import org.example.schoolmanagement.Repository.TeacherRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import java.util.List;
 public class TeacherService {
     private final TeacherRepo teacherRepo;
     private final AddressRepo addressRepo;
-
+    private final CourseRepo courseRepo;
     public List<Teacher> getAllTeachers() {
         return teacherRepo.findAll();
     }
@@ -53,5 +55,13 @@ public class TeacherService {
             throw new ApiException("Teacher/Address not found");
         }
         return teacher;
+    }
+
+    public String getTeacherNameByCourseID(Integer courseId){
+        Course course = courseRepo.findCourseById(courseId);
+        if (course == null) throw new ApiException("course not found");
+        Teacher teacher = course.getTeacher();
+        if (teacher == null) throw new ApiException("course has no assigned teacher");
+        return teacher.getName();
     }
 }

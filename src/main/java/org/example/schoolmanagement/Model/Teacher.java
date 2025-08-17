@@ -2,11 +2,12 @@ package org.example.schoolmanagement.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -40,4 +41,7 @@ public class Teacher {
     @OneToOne(cascade = CascadeType.ALL , mappedBy = "teacher")
     @PrimaryKeyJoinColumn
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "teacher")
+    private Set<Course> courses;
 }

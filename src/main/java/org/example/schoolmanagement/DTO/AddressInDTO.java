@@ -1,4 +1,4 @@
-package org.example.schoolmanagement.InDTO;
+package org.example.schoolmanagement.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

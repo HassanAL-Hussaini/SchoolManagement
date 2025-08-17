@@ -2,7 +2,7 @@ package org.example.schoolmanagement.Service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.schoolmanagement.API.ApiException;
-import org.example.schoolmanagement.InDTO.AddressInDTO;
+import org.example.schoolmanagement.DTO.AddressInDTO;
 import org.example.schoolmanagement.Model.Address;
 import org.example.schoolmanagement.Model.Teacher;
 import org.example.schoolmanagement.Repository.AddressRepo;
@@ -22,11 +22,11 @@ public class AddressService {
     }
 
     public void AddAddress(AddressInDTO addressInDTO) {
-        Teacher  teacher = teacherRepo.findTeacherById(addressInDTO.getTeacher_id());
+        Teacher teacher = teacherRepo.findTeacherById(addressInDTO.getTeacher_id());
         if(teacher==null){
             throw new ApiException("Teacher not found");
         }
-        //addressInDTO.getTeacher_id()
+        //addressInDTO.getTeacher_id() or 👇
         Address address = new Address(null, addressInDTO.getArea(), addressInDTO.getBuildingNumber(), addressInDTO.getStreet(), teacher);
         addressRepo.save(address);
     }
@@ -44,8 +44,8 @@ public class AddressService {
 
     //this will never work because it's one-to-one relation with the Teacher and the address is the follower, and we can't delete the follower while the boss is existed
     public void DeleteAddress(Integer addressId) {
-        Address oldAddress = addressRepo.findAddressById(addressId);
-        if(oldAddress==null){
+        Address deleteAddress = addressRepo.findAddressById(addressId);
+        if(deleteAddress==null){
             throw new ApiException("address not found");
         }
         addressRepo.deleteById(addressId);

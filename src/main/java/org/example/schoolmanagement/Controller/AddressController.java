@@ -3,11 +3,9 @@ package org.example.schoolmanagement.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.schoolmanagement.API.ApiResponse;
-import org.example.schoolmanagement.InDTO.AddressInDTO;
+import org.example.schoolmanagement.DTO.AddressInDTO;
 import org.example.schoolmanagement.Model.Address;
-import org.example.schoolmanagement.Model.Teacher;
 import org.example.schoolmanagement.Service.AddressService;
-import org.example.schoolmanagement.Service.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
