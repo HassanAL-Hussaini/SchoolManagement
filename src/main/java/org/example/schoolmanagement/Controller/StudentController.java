@@ -47,7 +47,7 @@ public class StudentController {
     }
 
     // POST: تسجيل الطالب في كورس
-    @PostMapping("/assign/{studentId}/{courseId}")
+    @PutMapping("/assign/{studentId}/{courseId}")
     public ResponseEntity<?> assignStudentToCourse(@PathVariable Integer studentId,
                                                    @PathVariable Integer courseId) {
         studentService.assignStudentToCourse(studentId, courseId);
@@ -68,9 +68,9 @@ public class StudentController {
     }
 
     // PUT: تغيير تخصّص الطالب
-    @PutMapping("/change-major/{studentId}")
+    @PutMapping("/change-major/{studentId}/{major}")
     public ResponseEntity<?> changeMajor(@PathVariable Integer studentId,
-                                         @RequestParam String major) {
+                                         @PathVariable String major) {
         studentService.ChangeMajor(studentId, major);
         return ResponseEntity.ok(new ApiResponse("student major changed successfully"));
     }

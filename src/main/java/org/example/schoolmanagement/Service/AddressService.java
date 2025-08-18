@@ -48,7 +48,19 @@ public class AddressService {
         if(deleteAddress==null){
             throw new ApiException("address not found");
         }
-        addressRepo.deleteById(addressId);
+
+        Teacher teacher = deleteAddress.getTeacher();
+
+        teacher.setAddress(null);
+        teacherRepo.save(teacher);
+
+        addressRepo.delete(deleteAddress);
+        //after delete no save
+
+
+
+
+
     }
 
 
